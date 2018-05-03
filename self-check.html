@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-card/paper-card.html">
 <link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 
 <!--
@@ -18,7 +19,14 @@ A reveal the answer element.
         overflow: hidden;
       }
 
-      paper-button#checkBtn {
+      :host[correct] #answer {
+        display: block;
+        background-color: whitesmoke;
+        padding: 25px;
+        width: 100%;
+      }
+
+      paper-icon-button#checkBtn {
         float: right;
         margin-bottom: 5px;
         background-color: #3884FF;
@@ -53,31 +61,19 @@ A reveal the answer element.
       }
 
       #answer {
-        background-color: whitesmoke;
-        padding: 25px;
-        width: 100%;
         display: none;
       }
-
-      :host[correct] #answer {
-        display: block;
-      }
-
     </style>
 
     <paper-card image="[[image]]">
-        <div id="header_wrap">
-          <iron-icon id="help" icon="icons:help"></iron-icon>
-          <div class="heading">[[title]]</div>
-        </div>
+      <div id="header_wrap">
+        <iron-icon id="help" icon="icons:help"></iron-icon>
+        <div class="heading">[[title]]</div>
+      </div>
       <div id="question">
         <slot name="question"></slot>
       </div>
-      
-        <paper-button id="checkBtn" class="check_btn" on-click="openAnswer">Check
-          <iron-icon icon="icons:chevron-right"></iron-icon>
-        </paper-button>
-    
+      <paper-icon-button id="checkBtn" icon="icons:chevron-right" on-click="openAnswer"></paper-icon-button>
     </paper-card>
 
     <div id="answer" class="dropdown_answer">
@@ -110,8 +106,8 @@ A reveal the answer element.
       },
 
       openAnswer: function () {
-      this.correct = !this.correct;
-    }
+        this.correct = !this.correct;
+      }
     });
 
 
