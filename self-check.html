@@ -1,0 +1,120 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+
+<!--
+`self-check`
+A reveal the answer element.
+
+@demo demo/index.html
+-->
+
+<dom-module id="self-check">
+  <template>
+    <style>
+      :host {
+        display: block;
+        overflow: hidden;
+      }
+
+      paper-button#checkBtn {
+        float: right;
+        margin-bottom: 5px;
+        background-color: #3884FF;
+        color: #fff;
+      }
+
+      iron-icon#help {
+        width: 35px;
+        height: 35px;
+        color: #fff;
+        padding: 5px;
+      }
+
+      .heading {
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 22px;
+        margin: 10px;
+      }
+
+      #header_wrap {
+        display: inline-flex;
+        background-color: #3884FF;
+        width: 100%;
+        margin: 10px 0 10px;
+      }
+
+      #question {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: grey;
+      }
+
+      #answer {
+        background-color: whitesmoke;
+        padding: 25px;
+        width: 100%;
+        display: none;
+      }
+
+      :host[correct] #answer {
+        display: block;
+      }
+
+    </style>
+
+    <paper-card image="[[image]]">
+        <div id="header_wrap">
+          <iron-icon id="help" icon="icons:help"></iron-icon>
+          <div class="heading">[[title]]</div>
+        </div>
+      <div id="question">
+        <slot name="question"></slot>
+      </div>
+      
+        <paper-button id="checkBtn" class="check_btn" on-click="openAnswer">Check
+          <iron-icon icon="icons:chevron-right"></iron-icon>
+        </paper-button>
+    
+    </paper-card>
+
+    <div id="answer" class="dropdown_answer">
+      <slot></slot>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'self-check',
+
+      properties: {
+        title: {
+          type: String,
+          value: '',
+        },
+
+        image: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
+
+        correct: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true,
+        }
+      },
+
+      openAnswer: function () {
+      this.correct = !this.correct;
+    }
+    });
+
+
+
+  </script>
+</dom-module>
