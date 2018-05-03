@@ -1,8 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-card/paper-card.html">
-<link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../iron-icon/iron-icon.html">
 
 <!--
 `self-check`
@@ -24,6 +22,7 @@ A reveal the answer element.
         background-color: whitesmoke;
         padding: 25px;
         width: 100%;
+        transition: ease 2s;
       }
 
       paper-icon-button#checkBtn {
@@ -63,6 +62,7 @@ A reveal the answer element.
       #answer {
         display: none;
       }
+
     </style>
 
     <paper-card image="[[image]]">
