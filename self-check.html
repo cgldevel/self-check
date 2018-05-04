@@ -15,24 +15,25 @@ A reveal the answer element.
       :host {
         display: block;
         overflow: hidden;
+        --accent-color: #3884FF;
       }
 
       :host[correct] #answer {
-        display: block;
-        background-color: whitesmoke;
-        padding: 25px;
-        width: 100%;
-        transition: ease 2s;
+        visibility: visible;
+        opacity: 1;
+        transition: all 0.5s ease-in-out;
+        height: 50px;
       }
 
       paper-icon-button#checkBtn {
         float: right;
         margin-bottom: 5px;
-        background-color: #3884FF;
-        color: #fff;
+        color: var(--accent-color);
+        width: 50px;
+        height: 50px;
       }
 
-      iron-icon#help {
+      iron-icon#checkmark {
         width: 35px;
         height: 35px;
         color: #fff;
@@ -48,7 +49,7 @@ A reveal the answer element.
 
       #header_wrap {
         display: inline-flex;
-        background-color: #3884FF;
+        background-color: var(--accent-color);
         width: 100%;
         margin: 10px 0 10px;
       }
@@ -60,20 +61,36 @@ A reveal the answer element.
       }
 
       #answer {
-        display: none;
+        visibility: hidden;
+        opacity: 0;
+        background-color: #fafafa;
+        padding: 25px;
+        width: 100%;
+      }
+
+      .triangle {
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-bottom: 20px solid var(--accent-color);
+        position: relative;
+        top: 11px;
+        left: -1px;
       }
 
     </style>
 
     <paper-card image="[[image]]">
+        <div class="triangle"></div>
       <div id="header_wrap">
-        <iron-icon id="help" icon="icons:help"></iron-icon>
+        <iron-icon id="checkmark" icon="icons:check-circle"></iron-icon>
         <div class="heading">[[title]]</div>
       </div>
       <div id="question">
         <slot name="question"></slot>
       </div>
-      <paper-icon-button id="checkBtn" icon="icons:chevron-right" on-click="openAnswer"></paper-icon-button>
+      <paper-icon-button id="checkBtn" icon="icons:expand-more" on-click="openAnswer" noink></paper-icon-button>
     </paper-card>
 
     <div id="answer" class="dropdown_answer">
